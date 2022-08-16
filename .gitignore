@@ -1,3 +1,4 @@
 api/src/node_modules
 init.sql
 api/src/.env*
+dist
