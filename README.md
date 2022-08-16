@@ -26,12 +26,13 @@ This example shows how to implement a **GraphQL server with TypeScript** with th
 Download this example:
 
 ```
-curl 
+curl -LJO 'https://github.com/sinhaGuild/pg-nexus-ts-gql/archive/refs/heads/main.zip'
 ```
 
 Install npm dependencies:
 
 ```
+
 cd api
 yarn install
 yarn run dev
@@ -74,3 +75,4 @@ yarn run dev
 ```
 
 Navigate to [http://localhost:4000](http://localhost:4000) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
+# pg-nexus-ts-gql
