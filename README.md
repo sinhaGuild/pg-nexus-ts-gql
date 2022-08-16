@@ -1,56 +1,76 @@
-##### PRISMA - NEXUS - GQL - APOLLO - POSTGRES - TYPESCRIPT
-
+#### TS - GRAPHQL - APOLLO-SERVER - NEXUS - PRISMA
 ---
 
-<img src="https://www.pngmart.com/files/2/Chicken-Transparent-PNG.png" alt="drawing" width="55%" style="margin-bottom:-100%; position: absolute; right:0"/>
+# GraphQL Server Example with `express-graphql`
 
-## COMMON PATTERNS
+This example shows how to implement a **GraphQL server with TypeScript** with the following stack:
 
-### Folder Structure
+- [**Express GraphQL**](https://github.com/graphql/express-graphql): Express middleware for GraphQL HTTP servers   
+- [**GraphQL Nexus**](https://nexusjs.org/docs/): GraphQL schema definition and resolver implementation 
+- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Databases access (ORM)                  
+- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Database migrations               
+- [**SQLite**](https://www.sqlite.org/index.html): Local, file-based SQL database
 
-`src`
+## Contents
 
-- Root Folder
+- [Getting Started](#getting-started)
+- [Using the GraphQL API](#using-the-graphql-api)
+- [Evolving the app](#evolving-the-app)
+- [Switch to another database (e.g. PostgreSQL, MySQL, SQL Server)](#switch-to-another-database-eg-postgresql-mysql-sql-server)
+- [Next steps](#next-steps)
 
-`server.ts`
+## Getting started
 
-- Schema-resolver objectTypes, queryTypes, mutationTypes
+### 1. Download example and install dependencies
 
-`context.ts`
+Download this example:
 
-- Returns a singleton instance of prismaclient
+```
+curl 
+```
 
-`schema.ts`
+Install npm dependencies:
 
-- Will invoke the graphql-apollo server.
+```
+cd api
+yarn install
+yarn run dev
+```
 
----
+<details><summary><strong>Alternative:</strong> Clone the entire repo</summary>
 
-## KEY VARIANCES
+Clone this repository:
 
-### graphql-express vs. graphql
+```
+git clone git@github.com:prisma/prisma-examples.git --depth=1
+```
 
-`server.ts` - express vs. apollo-server - express uses graphiql vs. apollo uses apollo-ui
+Install npm dependencies:
 
-`schema.ts` - invoking context as a singleton for apollo-server
+```
+cd prisma-examples/typescript/graphql-express
+npm install
+```
 
-### graphql-express vs. graphql-express-sdl-first
+</details>
 
-#### _sdl or SCHEMA-first_
+### 2. Create and seed the database
 
-    Manually write the GraphQL schema definition in GraphQL SDL
-    Implement the required resolver functions
+Run the following command to create your SQLite database file. This also creates the `User` and `Post` tables that are defined in [`prisma/schema.prisma`](./prisma/schema.prisma):
 
-    - typedefs (schema)
-    - queries
-    - mutations
+```
+npx prisma migrate dev --name init
+```
 
-#### _nexus-based OR CODE-first_
+When `npx prisma migrate dev` is executed against a newly created database, seeding is also triggered. The seed file in [`prisma/seed.ts`](./prisma/seed.ts) will be executed and your database will be populated with the sample data.
 
-> The only tool you need is the programming language
 
-    There is no manually maintained version of your schema definition.
-    SDL(or schema) is generated from the code that implements the schema.
+### 3. Start the GraphQL server
 
-    - schema-query-mutations
-    - prisma
+Launch your GraphQL server with this command:
+
+```
+yarn run dev
+```
+
+Navigate to [http://localhost:4000](http://localhost:4000) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
