@@ -43,14 +43,14 @@ yarn run dev
 Clone this repository:
 
 ```
-git clone git@github.com:prisma/prisma-examples.git --depth=1
+git clone git@github.com:sinhaGuild/pg-nexus-ts-gql.git --depth=1
 ```
 
 Install npm dependencies:
 
 ```
-cd prisma-examples/typescript/graphql-express
-npm install
+cd api/
+yarn install
 ```
 
 </details>
