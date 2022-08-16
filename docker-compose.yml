@@ -1,0 +1,28 @@
+services:
+  api:
+    build: ./api
+    container_name: graphql-server
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./api:/app:ro
+      - /app/node_modules
+      - /app/prisma
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/create_tables.sql #This is the path to a database schema seed.
+
+volumes:
+  postgres:
